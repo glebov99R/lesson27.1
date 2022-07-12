@@ -7,6 +7,7 @@ import com.example.lesson27.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     val a = 5
+    val b = 3
 
     lateinit var bindingClass: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
