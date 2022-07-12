@@ -6,6 +6,8 @@ import com.example.lesson27.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    val a = 5
+
     lateinit var bindingClass: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
