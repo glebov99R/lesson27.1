@@ -31,12 +31,12 @@ class EditActivity : AppCompatActivity() {
     }
     private fun initButtons()= with(binding) {
 
-            bNext.setOnClickListener{
-                indexImage++
-                if (indexImage > imageIdList.size -1) indexImage = 0
-                ImageId = imageIdList[indexImage]
-                imageView.setImageResource(ImageId)
-             }
+        bNext.setOnClickListener{
+            indexImage++
+            if (indexImage > imageIdList.size -1) indexImage = 0
+            ImageId = imageIdList[indexImage]
+            imageView.setImageResource(ImageId)
+        }
         bDone.setOnClickListener {
             val result = Animal(ImageId, edTitle.text.toString(), edDesc.text.toString())
             val editIntent = Intent().apply{
@@ -45,6 +45,5 @@ class EditActivity : AppCompatActivity() {
             setResult(RESULT_OK, editIntent)
             finish()
         }
-        }
     }
-
+}
