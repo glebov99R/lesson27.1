@@ -53,7 +53,7 @@ class EditActivity : AppCompatActivity() {
         bDone.setOnClickListener { // Слушатель нажатий кнопки DONE
             val result = Animal(ImageId, edTitle.text.toString(), edDesc.text.toString()) // В result присваиваются параметры класса Animal в формате ID и текста
             val editIntent = Intent().apply { // В переменную editIntent присваивается  объекст класса Intent
-                putExtra("animal", result) // Намерение отправить result на другое Activity которые примет его по слову "animal"
+               putExtra("animal", result) // Намерение отправить result на другое Activity которые примет его по слову "animal"
             }
             setResult(RESULT_OK, editIntent) // Устанавливаем результат
             finish() // закрывает данное Activity

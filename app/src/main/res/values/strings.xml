@@ -3,4 +3,6 @@
     <string name="nul">\u0020</string>
     <string name="Title">Title</string>
     <string name="Description">Descriprion</string>
+    <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
 </resources>
