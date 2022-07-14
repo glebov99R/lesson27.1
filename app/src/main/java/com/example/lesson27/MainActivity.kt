@@ -11,13 +11,19 @@ import com.example.lesson27.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var adapter = AnimalAdapter() // Создан объект класса адаптера и записан в переменную adapter
+
     private var editLauncher : ActivityResultLauncher<Intent>? = null // Создан лаунчер который запускает Activity на которое мы хотим перейти
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        init()
+        init() // Инициализия функции init(запускает отрисовку макета) сразу после запуска MainActivity
+
+        /**
+         * editLauncher запускается сразу после открытия данного Activity, editLauncher запускает режим  ожидания
+         * данных от кнопки DONE на EditActivity по ключевому слову animal
+         */
         editLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == RESULT_OK){
                 adapter.addAnimal(it.data?.getSerializableExtra("animal") as Animal)
