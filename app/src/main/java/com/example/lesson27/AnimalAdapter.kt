@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson27.databinding.AnimalItemBinding
 
-class AnimalAdapter : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>() {
+class AnimalAdapter(val listener: Listener) : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>() {
     val AnimalList = ArrayList<Animal>() // Создаём список типа Animal
 
     class AnimalHolder(item: View) : RecyclerView.ViewHolder(item)  { // класс AnimalHolder хранит в себе ссылки на айтемы резметки animal_item
@@ -16,10 +16,17 @@ class AnimalAdapter : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>() {
         /**
          * Функция bind присваивает элементам разметки в layout-е значение в констркукторе дата класса Animal
          */
-        fun bind(flower: Animal) {
+        fun bind(flower: Animal, listener: Listener) {
             binding.apply {
                 im.setImageResource(flower.ImageId)
                 tvTitle.text = flower.title
+
+                /**
+                 * Слушатель нажатий
+                 */
+                itemView.setOnClickListener{
+                    listener.onClick(flower) // при нажатии открывает созданную карточку животного
+                }
 
             }
         }
@@ -37,7 +44,7 @@ class AnimalAdapter : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>() {
     }
 
     override fun onBindViewHolder(holder: AnimalHolder, position: Int) { // ЗАПОЛНЯЕТ РАЗМЕТКУ
-        holder.bind(AnimalList[position])
+        holder.bind(AnimalList[position], listener)
     }
 
     override fun getItemCount(): Int { // getItemCount определяет сколько раз нужно создать шаблон и заполнить его
@@ -51,6 +58,10 @@ class AnimalAdapter : RecyclerView.Adapter<AnimalAdapter.AnimalHolder>() {
     fun addAnimal(animal: Animal) {
         AnimalList.add(animal)
         notifyDataSetChanged() // порверяет список flowerList находит новый элемент и добавляет его
+    }
+ // Создан интерфейч
+    interface Listener{
+        fun onClick(animal: Animal)
     }
 
 }

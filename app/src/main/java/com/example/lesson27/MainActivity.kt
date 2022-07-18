@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lesson27.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AnimalAdapter.Listener {
     lateinit var binding: ActivityMainBinding
-    private var adapter = AnimalAdapter() // Создан объект класса адаптера и записан в переменную adapter
+    private var adapter = AnimalAdapter(this) // Создан объект класса адаптера и записан в переменную adapter
 
     private var editLauncher : ActivityResultLauncher<Intent>? = null // Создан лаунчер который запускает Activity на которое мы хотим перейти
 
@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         init() // Инициализия функции init(запускает отрисовку макета) сразу после запуска MainActivity
 
         /**
@@ -43,5 +44,14 @@ class MainActivity : AppCompatActivity() {
                 editLauncher?.launch(Intent(this@MainActivity , EditActivity::class.java)) // Открывает EditActivity
             }
         }
+    }
+
+    /**
+     * Функция onClick откроет ContentActivity и передаст в него контент для разметки
+     */
+    override fun onClick(animal: Animal) {
+startActivity(Intent(this, ContentActivity::class.java).apply {
+    putExtra("item", animal)
+})
     }
 }
